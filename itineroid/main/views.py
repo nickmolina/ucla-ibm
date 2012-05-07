@@ -24,3 +24,8 @@ def itinerary(request):
   html = t.render(RequestContext(request, context))
   return HttpResponse(html)
 
+def create_itinerary(request):
+  t = get_template('itinerary.html')
+  context = { 'page': 'itinerary'}
+  html = t.render(RequestContext(request, context))
+  return HttpResponse(html)
