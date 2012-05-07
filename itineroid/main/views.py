@@ -11,13 +11,16 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import get_template
 from django.core.paginator import Paginator
-from django.core.context_processors import csrf
 
 def home(request):
   t = get_template('index.html')
   context = { 'page': 'home'}
-  context.update(csrf(request))
-  print str(context)
+  html = t.render(RequestContext(request, context))
+  return HttpResponse(html)
+
+def itinerary(request):
+  t = get_template('itinerary.html')
+  context = { 'page': 'itinerary'}
   html = t.render(RequestContext(request, context))
   return HttpResponse(html)
 
