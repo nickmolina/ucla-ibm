@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
+from userena import views as userena_views
+
 urlpatterns = patterns('',
     # Example:
     # (r'^itineroid/', include('itineroid.foo.urls')),
@@ -14,7 +16,9 @@ urlpatterns = patterns('',
     # Admin pages
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^accounts/', include('userena.urls')),
+    url(r'^accounts/(\w+)/$', userena_views.profile_detail, 
+      {'template_name': 'profile.html'}),
+    url(r'^accounts/', include('userena.urls')),
 
     url(r'^$', 'main.views.home'),
 
