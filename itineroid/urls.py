@@ -1,3 +1,4 @@
+
 from django.conf import settings
 from django.conf.urls.defaults import *
 
@@ -16,13 +17,17 @@ urlpatterns = patterns('',
     # Admin pages
     (r'^admin/', include(admin.site.urls)),
 
-    url(r'^accounts/(\w+)/$', userena_views.profile_detail, 
-      {'template_name': 'profile.html'}),
+    # url(r'^accounts/(\w+)/$', userena_views.profile_detail, 
+    #  {'template_name': 'profile.html'}),
     url(r'^accounts/', include('userena.urls')),
 
     url(r'^$', 'main.views.home'),
+    url(r'^profile/$', 'main.views.profile'),
+    url(r'^profile/itinerary/$', 'main.views.itinerary'),
+    url(r'^profile/itinerary/add/$', 'main.views.itineraryadd'),
+
 
     # Media Files
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', 
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
       {'document_root' : settings.MEDIA_ROOT}),
 )

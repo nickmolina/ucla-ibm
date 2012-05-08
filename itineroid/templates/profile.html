@@ -1,1 +1,38 @@
-<h>Insert your code here</h>
+<h1> Your Profile </h1>    
+user.id: {{ profile.user.id }}
+
+<h2> Add New Itinerary </h2>
+<form action="/profile/itinerary/add/" method="get">
+<input type="hidden" name="profileid" value="{{profile.id}}">
+Itinerary Name: <input type="text" name="name" /></br>
+Location: <input type="text" name="location" /></br>
+Start (YYYY-MM-DD): <input type="text" name="start" /></br>
+End (YYYY-MM-DD): <input type="text" name="end" /></br>
+
+<h3> Invite up to 3 friends! </h3>
+Friends: <input type="text" name="friend1" /></br>
+Friends: <input type="text" name="friend2" /></br>
+Friends: <input type="text" name="friend3" /></br> 
+<input type="submit" value="Submit" />
+</form>
+
+
+
+<h2> Your Itineraries </h2>
+<ul>
+{% for itinerary in profile.itinerary_set.all %}
+    <li>
+        <a href=/profile/itinerary/?id={{ itinerary.id }}>{{ itinerary.name }}</a>:
+        {% for location in itinerary.location_set.all %}
+            {% if forloop.last %}
+                {{ location.name }}
+            {% else %}
+                {{ location.name }},
+            {% endif %}
+        {% endfor % %}
+    </li>    
+{% endfor %}
+</ul>
+
+
+

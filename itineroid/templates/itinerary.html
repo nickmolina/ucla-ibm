@@ -1,1 +1,12 @@
-<h>Insert your code here</h>
+<h1> Itinerary: {{ itinerary.name }} </h1>
+
+{% for location in itinerary.location_set.all %}
+    <p>
+    Location: {{ location.name }}</br>
+    <ul>
+    {% for activity in location.activity_set.all %}
+        <li>Activity: {{ activity.name }}</li>
+    {% endfor %}
+    </ul>
+    </p>
+{% endfor %}
